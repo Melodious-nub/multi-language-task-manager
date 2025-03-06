@@ -1,0 +1,24 @@
+<div class="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let task of taskService.tasks()" class="bg-gray-900 p-5 rounded-lg shadow-lg">
+        <h3 class="text-white text-lg font-semibold">{{ task.title }}</h3>
+        <p class="text-gray-400 mt-1">{{ task.description }}</p>
+        <p class="text-gray-400 mt-2"><strong>Status:</strong> {{ task.status }}</p>
+
+        <div class="mt-4 flex gap-2">
+            <button (click)="taskService.updateTaskStatus(task.id, 'in-progress')"
+                class="px-3 py-1 text-sm rounded bg-yellow-500 hover:bg-yellow-600 text-white"
+                *ngIf="task.status === 'pending'">
+                Start
+            </button>
+            <button (click)="taskService.updateTaskStatus(task.id, 'completed')"
+                class="px-3 py-1 text-sm rounded bg-green-500 hover:bg-green-600 text-white"
+                *ngIf="task.status === 'in-progress'">
+                Complete
+            </button>
+            <button (click)="taskService.deleteTask(task.id)"
+                class="px-3 py-1 text-sm rounded bg-red-500 hover:bg-red-600 text-white">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
