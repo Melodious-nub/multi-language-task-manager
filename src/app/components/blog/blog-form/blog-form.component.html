@@ -1,0 +1,45 @@
+<!-- Blog Form (Top Center Card) -->
+<div class="bg-white drop-shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+    <h2 class="text-center text-2xl font-semibold mb-4">
+        {{ isEditMode() ? 'Update Blog' : 'Blog Details' }}
+    </h2>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="mb-4">
+            <label for="blog-title" class="block text-gray-700 text-sm font-bold mb-2">Blog Title</label>
+            <input id="blog-title" type="text" class="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                [(ngModel)]="blogForm().title" name="title" placeholder="Enter blog title" required>
+        </div>
+
+        <div class="mb-4">
+            <label for="blog-description" class="block text-gray-700 text-sm font-bold mb-2">Blog Description</label>
+            <textarea id="blog-description" rows="4" class="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                [(ngModel)]="blogForm().description" name="description" placeholder="Enter blog description"
+                required></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label for="blog-date" class="block text-gray-700 text-sm font-bold mb-2">Blog Date</label>
+            <input id="blog-date" type="text" class="w-full p-3 border border-gray-300 rounded-md shadow-sm"
+                [(ngModel)]="blogForm().date" name="date" value="{{ currentDate }}" readonly>
+        </div>
+
+        <button type="submit"
+            class="w-full py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer mb-4">
+            {{ isEditMode() ? 'Update Blog' : 'Submit Blog' }}
+        </button>
+
+        @if (invalidForm()) {
+        <div class="flex items-center p-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium">Danger alert!</span> Input field can not be empty
+            </div>
+        </div>
+        }
+    </form>
+</div>
